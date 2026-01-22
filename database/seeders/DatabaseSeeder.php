@@ -13,13 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // User default (aman untuk production, tidak duplicate)
         User::firstOrCreate(
-            ['email' => 'test@example.com'], // cek unik
+            ['email' => 'test@example.com'],
             [
                 'name' => 'Test User',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
         );
+
+        // Seed data districts (WAJIB agar /kecamatan tidak error)
+        $this->call([
+            DistrictSeeder::class,
+        ]);
     }
 }
