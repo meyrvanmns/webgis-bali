@@ -2,30 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User default (aman untuk production, tidak duplicate)
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => Hash::make('password'),
-                'email_verified_at' => now(),
-            ]
-        );
+        if (Schema::hasTable('users')) {
+            User::firstOrCreate(
+                ['email' => 'test@example.com'],
+                [
+                    'name' => 'Admin',
+                    'password' => bcrypt('password'),
+                ]
+            );
+        }
 
-        // Seed data districts (WAJIB agar /kecamatan tidak error)
         $this->call([
-            DistrictSeeder::class,
+            RegencySeeder::class,
+            DistrictsSeeder::class,
         ]);
     }
 }
