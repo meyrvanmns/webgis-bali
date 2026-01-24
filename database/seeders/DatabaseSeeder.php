@@ -19,10 +19,5 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         }
-
-        $this->call([
-            RegencySeeder::class,
-            DistrictsSeeder::class,
-        ]);
     }
 }
