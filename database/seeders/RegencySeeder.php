@@ -17,6 +17,6 @@ class RegencySeeder extends Seeder
             return;
         }
 
-        DB::statement(File::get($sqlPath));
+        DB::unprepared(File::get($sqlPath));
     }
 }
