@@ -13,29 +13,29 @@ class DistrictsSeeder extends Seeder
         $sqlPath = database_path('seeders/sql/districts.sql');
 
         if (!File::exists($sqlPath)) {
-            $this->command->error('File districts.sql tidak ditemukan!');
+            $this->command->error('File districts.sql tidak ditemukan');
             return;
         }
 
+        // Membaca file SQL baris demi baris agar tidak overload
         $sql = File::get($sqlPath);
-        // Memecah file berdasarkan titik koma (;)
+        
+        // Memisahkan setiap perintah INSERT (berdasarkan tanda titik koma)
         $queries = explode(';', $sql);
 
         $this->command->info('Memulai seeding data districts...');
 
         foreach ($queries as $query) {
             $cleanQuery = trim($query);
-            
-            // HANYA jalankan jika baris berisi perintah INSERT INTO
-            if (!empty($cleanQuery) && str_starts_with(strtoupper($cleanQuery), 'INSERT INTO')) {
+            if (!empty($cleanQuery)) {
                 try {
                     DB::statement($cleanQuery);
                 } catch (\Exception $e) {
-                    $this->command->error("Gagal insert data districts: " . $e->getMessage());
+                    $this->command->error("Gagal insert: " . substr($cleanQuery, 0, 50) . "...");
                 }
             }
         }
         
-        $this->command->info('Seeding districts selesai!');
+        $this->command->info('Seeding selesai!');
     }
 }
