@@ -17,6 +17,25 @@ class RegencySeeder extends Seeder
             return;
         }
 
-        DB::unprepared(File::get($sqlPath));
+        // Membaca file SQL baris demi baris agar tidak overload
+        $sql = File::get($sqlPath);
+        
+        // Memisahkan setiap perintah INSERT (berdasarkan tanda titik koma)
+        $queries = explode(';', $sql);
+
+        $this->command->info('Memulai seeding data regencies...');
+
+        foreach ($queries as $query) {
+            $cleanQuery = trim($query);
+            if (!empty($cleanQuery)) {
+                try {
+                    DB::statement($cleanQuery);
+                } catch (\Exception $e) {
+                    $this->command->error("Gagal insert: " . substr($cleanQuery, 0, 50) . "...");
+                }
+            }
+        }
+        
+        $this->command->info('Seeding selesai!');
     }
 }
