@@ -19,4 +19,4 @@ Route::get('/kemiskinan', [RegencyController::class, 'kemiskinan']);
 Route::get('/kabkota', [RegencyController::class, 'kabkota']);
 Route::get('/home', [RegencyController::class, 'home']);
 Route::get('/kecamatan', [DistrictsController::class, 'kecamatan']);
-Route::get('/anggota', [Controller::class, 'anggota']);
+// Route::get('/anggota', [Controller::class, 'anggota']);
