@@ -28,8 +28,8 @@ https://webgis-bali-production.up.railway.app/
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/meyrvanmns/web-notaris.git
-cd web-notaris
+git clone https://github.com/meyrvanmns/webgis-bali.git
+cd webgis-bali
 ```
 ### 2️⃣ Install Dependency
 ```bash
