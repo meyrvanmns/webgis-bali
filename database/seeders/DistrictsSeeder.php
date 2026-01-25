@@ -17,26 +17,25 @@ class DistrictsSeeder extends Seeder
             return;
         }
 
+        // Membaca file SQL baris demi baris agar tidak overload
         $sql = File::get($sqlPath);
-        // Memecah file berdasarkan tanda titik koma (;)
+        
+        // Memisahkan setiap perintah INSERT (berdasarkan tanda titik koma)
         $queries = explode(';', $sql);
 
         $this->command->info('Memulai seeding data districts...');
 
         foreach ($queries as $query) {
             $cleanQuery = trim($query);
-            
-            // HANYA jalankan jika string diawali dengan "INSERT INTO"
-            // Ini akan melewati baris komentar seperti -- Database: db_projectsig
-            if (!empty($cleanQuery) && str_starts_with(strtoupper($cleanQuery), 'INSERT INTO')) {
+            if (!empty($cleanQuery)) {
                 try {
                     DB::statement($cleanQuery);
                 } catch (\Exception $e) {
-                    $this->command->error("Gagal insert data: " . substr($cleanQuery, 0, 50) . "...");
+                    $this->command->error("Gagal insert: " . substr($cleanQuery, 0, 50) . "...");
                 }
             }
         }
         
-        $this->command->info('Seeding districts selesai!');
+        $this->command->info('Seeding selesai!');
     }
 }
