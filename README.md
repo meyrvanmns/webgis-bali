@@ -1,4 +1,4 @@
-# 🏛️ Web Notaris
+# 🏛️ Web Peta Tematik Provinsi Bali
 
 Website Peta Tematik Provinsi Bali adalah aplikasi berbasis web yang digunakan untuk memetakan data geografis kabupaten/kota dan kecamatan di Provinsi Bali. Aplikasi ini memudahkan pengguna untuk melihat data geografis interaktif, seperti Luas Wilayah, Populasi Penduduk, Idex Pembangunan Manusia (IPM), Produk Domestik Regional Bruto - Perkapita (PDRB), Kepadatan Penduduk, Distribusi Pariwisata, Tingkat Pengangguran, dan Tingkat Kemiskinan.
 
